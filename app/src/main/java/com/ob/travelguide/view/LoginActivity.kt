@@ -1,4 +1,4 @@
-package com.ob.travelguide
+package com.ob.travelguide.view
 
 import android.content.Intent
 import android.net.Uri
@@ -54,6 +54,8 @@ class LoginActivity : AppCompatActivity() {
             withContext(Dispatchers.Main) {
                 if(response != null) {
                     println("Access Token : ${response.accessToken}")
+                    var intent = Intent(this@LoginActivity,MainActivity::class.java)
+                    startActivity(intent)
                 }
                 else {
                     println("Access Token : Error")

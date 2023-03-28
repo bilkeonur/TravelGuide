@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Travel Guide</string>
+    <string name="place_title">Yerler</string>
+    <string name="place_detail" >Detaylar</string>
+</resources>
