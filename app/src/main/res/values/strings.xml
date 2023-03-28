@@ -3,4 +3,11 @@
     <string name="place_title">Places</string>
     <string name="place_detail" >Place Detail</string>
     <string name="cities_spinner">Cities Spinner</string>
+    <string name="place_image">Place Image</string>
+    <string name="place_name">Place Name</string>
+    <string name="place_category_title">Category :</string>
+    <string name="place_category">Museum</string>
+    <string name="place_region_title">Region :</string>
+    <string name="place_region">Ankara</string>
+    <string name="no_data">No Data</string>
 </resources>

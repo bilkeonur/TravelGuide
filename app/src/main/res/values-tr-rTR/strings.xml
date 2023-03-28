@@ -4,4 +4,11 @@
     <string name="place_title">Yerler</string>
     <string name="place_detail" >Detaylar</string>
     <string name="cities_spinner">Şehir Listesi</string>
+    <string name="place_image">Yer İkonu</string>
+    <string name="place_name">Yer İsmi</string>
+    <string name="place_category_title">Kategori :</string>
+    <string name="place_category">Müze</string>
+    <string name="place_region_title">Bölge :</string>
+    <string name="place_region">Ankara</string>
+    <string name="no_data">Veri Bulunamadı</string>
 </resources>

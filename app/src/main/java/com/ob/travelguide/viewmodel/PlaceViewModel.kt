@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.ob.travelguide.model.Place.Place
 import com.ob.travelguide.repo.IPlaceRepository
 import com.ob.travelguide.util.Resource
+import com.ob.travelguide.util.Status
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import javax.inject.Inject
@@ -21,7 +22,9 @@ class PlaceViewModel @Inject constructor(private val placeRepository: IPlaceRepo
 
     fun getPlaces() {
         viewModelScope.launch {
-            var baseURL = "https://api.foursquare.com/v3/places/search?sort=POPULARITY&limit=50"
+            places.value = Resource<Place>(Status.LOADING,null,"Loading")
+            //Search For Istanbul
+            var baseURL = "https://api.foursquare.com/v3/places/search?sort=POPULARITY&limit=50&ll=41.0091,28.9743"
             val response = placeRepository.getPlaces(baseURL)
             places.value = response
         }

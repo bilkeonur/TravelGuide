@@ -38,7 +38,7 @@ object AppModule {
     @Provides
     fun injectGlide(@ApplicationContext context: Context) = Glide
         .with(context).setDefaultRequestOptions(
-            RequestOptions().placeholder(R.drawable.ic_launcher_foreground)
-                .error(R.drawable.ic_launcher_foreground)
+            RequestOptions().placeholder(R.drawable.ic_place)
+                .error(R.drawable.ic_place)
         )
 }
