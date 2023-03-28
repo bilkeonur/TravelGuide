@@ -5,7 +5,8 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.ob.travelguide.databinding.ActivityLoginBinding
-import com.ob.travelguide.service.FoursquareAPI
+import com.ob.travelguide.service.FourSquareAPI
+import com.ob.travelguide.util.Util
 import kotlinx.coroutines.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -19,11 +20,6 @@ class LoginActivity : AppCompatActivity() {
         println("Error : ${throwable.localizedMessage}")
     }
 
-    private val baseUrl = "https://foursquare.com/oauth2/"
-    private val clientId = "RZUHZE5U5CXKPUPHGEAP32SHROBSH3IUTDZWF0LZ1TPVXDVC"
-    private val clientSecret = "5ROMHPLHAGWRZYATLO4ISAE5UULCTAPBHTXXRPRNTONHBNYZ"
-    private val redirectUri = "travelguide://callback"
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -33,9 +29,9 @@ class LoginActivity : AppCompatActivity() {
 
         btnLogin.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(
-                "${baseUrl}authenticate?client_id=${clientId}" +
+                "${Util.baseUrl}oauth2/authenticate?client_id=${Util.clientId}" +
                         "&response_type=code" +
-                        "&redirect_uri=${redirectUri}"))
+                        "&redirect_uri=${Util.redirectUri}"))
 
             startActivity(intent)
         }
@@ -43,13 +39,13 @@ class LoginActivity : AppCompatActivity() {
 
     fun getAccessToken(code:String) {
         val retrofit = Retrofit.Builder()
-            .baseUrl(baseUrl)
+            .baseUrl(Util.baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(FoursquareAPI::class.java)
+            .create(FourSquareAPI::class.java)
 
         job = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
-            val response = retrofit.getAccessToken(clientId, clientSecret, "authorization_code", redirectUri, code)
+            val response = retrofit.getAccessToken(Util.clientId, Util.clientSecret, "authorization_code", Util.redirectUri, code)
 
             withContext(Dispatchers.Main) {
                 if(response != null) {
@@ -68,7 +64,7 @@ class LoginActivity : AppCompatActivity() {
         super.onResume()
         var uri = intent.data
 
-        if(uri!=null && uri.toString().startsWith(redirectUri)) {
+        if(uri!=null && uri.toString().startsWith(Util.redirectUri)) {
             val code = uri.getQueryParameter("code")
             code?.let {
                 println("Code : ${code}")

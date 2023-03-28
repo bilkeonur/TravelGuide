@@ -20,7 +20,10 @@
             app:popupTheme="@style/Theme.TravelGuide.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="dasdasdasdasd"/>
     <include layout="@layout/content_main" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

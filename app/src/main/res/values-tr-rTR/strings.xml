@@ -3,4 +3,5 @@
     <string name="app_name">Travel Guide</string>
     <string name="place_title">Yerler</string>
     <string name="place_detail" >Detaylar</string>
+    <string name="cities_spinner">Şehir Listesi</string>
 </resources>
