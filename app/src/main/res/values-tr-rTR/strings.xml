@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Travel Guide</string>
+    <string name="app_name">Seyahat Rehberi</string>
     <string name="place_title">Yerler</string>
     <string name="place_detail" >Detaylar</string>
     <string name="cities_spinner">Şehir Listesi</string>
     <string name="place_image">Yer İkonu</string>
-    <string name="place_name">Yer İsmi</string>
+    <string name="place_name_title">Yer İsmi :</string>
+    <string name="place_name">Galata Köprüsü</string>
     <string name="place_category_title">Kategori :</string>
     <string name="place_category">Müze</string>
     <string name="place_region_title">Bölge :</string>
-    <string name="place_region">Ankara</string>
+    <string name="place_region">Istanbul</string>
     <string name="no_data">Veri Bulunamadı</string>
     <string name="app_description">Seyahat Rehberi\nHadi Seyahat Edelim</string>
     <string name="login_button_text">Foursquare ile Giriş Yap</string>
@@ -18,4 +19,8 @@
     <string name="text_logout_question">Çıkış yapmak istediğinizden emin misiniz?</string>
     <string name="text_yes">Evet</string>
     <string name="text_no">Hayır</string>
+    <string name="place_address_title">Adres :</string>
+    <string name="place_address">Eminönü - Karaköy Arası, İstanbul</string>
+    <string name="get_directions">Yol Tarifi</string>
+    <string name="txt_details">Detaylar</string>
 </resources>

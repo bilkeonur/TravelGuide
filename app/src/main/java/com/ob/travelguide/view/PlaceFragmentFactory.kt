@@ -12,6 +12,7 @@ class PlaceFragmentFactory @Inject constructor(
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
         return when (className) {
             PlaceFragment::class.java.name -> PlaceFragment(placeRecyclerAdapter, glide)
+            PlaceDetailFragment::class.java.name -> PlaceDetailFragment(glide)
             else -> super.instantiate(classLoader, className)
         }
     }

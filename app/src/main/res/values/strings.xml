@@ -4,11 +4,12 @@
     <string name="place_detail">Place Detail</string>
     <string name="cities_spinner">Cities Spinner</string>
     <string name="place_image">Place Image</string>
-    <string name="place_name">Place Name</string>
+    <string name="place_name_title">Place Name :</string>
+    <string name="place_name">Galata Bridge</string>
     <string name="place_category_title">Category :</string>
     <string name="place_category">Museum</string>
     <string name="place_region_title">Region :</string>
-    <string name="place_region">Ankara</string>
+    <string name="place_region">Istanbul</string>
     <string name="no_data">No Data</string>
     <string name="app_description">Travel Guide\nLet\'s Travel</string>
     <string name="login_button_text">Login With Foursquare</string>
@@ -17,4 +18,8 @@
     <string name="text_logout_question">Are you sure you want to Logout?</string>
     <string name="text_yes">Yes</string>
     <string name="text_no">No</string>
+    <string name="place_address_title">Address :</string>
+    <string name="place_address">Eminönü - Karaköy Arası, İstanbul</string>
+    <string name="get_directions">Get Directions</string>
+    <string name="txt_details">Details</string>
 </resources>
