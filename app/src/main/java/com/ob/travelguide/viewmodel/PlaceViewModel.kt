@@ -26,7 +26,7 @@ class PlaceViewModel @Inject constructor(private val placeRepository: IPlaceRepo
             //Search For Istanbul
             val baseURL = "https://api.foursquare.com/v3/places/search?sort=POPULARITY&limit=50&ll=41.0091,28.9743"
             val response = placeRepository.getPlaces(baseURL)
-            places.value = response
+            places.value = Resource<Place>(Status.SUCCESS,response.data,"")
         }
     }
 }
