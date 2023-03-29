@@ -4,7 +4,9 @@ import android.content.Context
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.ob.travelguide.R
+import com.ob.travelguide.repo.ILoginRepository
 import com.ob.travelguide.repo.IPlaceRepository
+import com.ob.travelguide.repo.LoginRepository
 import com.ob.travelguide.repo.PlaceRepository
 import com.ob.travelguide.service.FourSquareAPI
 import com.ob.travelguide.util.Util
@@ -23,7 +25,11 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun injectRepo(api: FourSquareAPI) = PlaceRepository(api) as IPlaceRepository
+    fun injectPlaceRepo(api: FourSquareAPI) = PlaceRepository(api) as IPlaceRepository
+
+    @Singleton
+    @Provides
+    fun injectLoginRepo(api: FourSquareAPI) = LoginRepository(api) as ILoginRepository
 
     @Singleton
     @Provides

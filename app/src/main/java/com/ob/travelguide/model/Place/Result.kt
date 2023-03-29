@@ -23,4 +23,4 @@ data class Result(
     val relatedPlaces: RelatedPlaces?,
     @SerializedName("timezone")
     val timezone: String?
-)
+) :java.io.Serializable

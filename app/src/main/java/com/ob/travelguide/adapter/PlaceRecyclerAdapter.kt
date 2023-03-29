@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -14,7 +15,7 @@ import com.ob.travelguide.model.Place.Icon
 import javax.inject.Inject
 import com.ob.travelguide.model.Place.Result
 
-class PlaceRecyclerAdapter @Inject constructor(val glide: RequestManager): RecyclerView.Adapter<PlaceRecyclerAdapter.PlaceViewHolder>(){
+class PlaceRecyclerAdapter @Inject constructor(private val glide: RequestManager): RecyclerView.Adapter<PlaceRecyclerAdapter.PlaceViewHolder>(){
     class PlaceViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
 
     private val diffUtil = object: DiffUtil.ItemCallback<Result>() {
@@ -34,6 +35,8 @@ class PlaceRecyclerAdapter @Inject constructor(val glide: RequestManager): Recyc
         get() = recyclerViewDiffer.currentList
         set(value) = recyclerViewDiffer.submitList(value)
 
+    var itemClickListener: ((position:Int) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaceViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.row_place, parent,false)
         return PlaceViewHolder(view)
@@ -44,6 +47,7 @@ class PlaceRecyclerAdapter @Inject constructor(val glide: RequestManager): Recyc
     }
 
     override fun onBindViewHolder(holder: PlaceViewHolder, position: Int) {
+        val crdContainer = holder.itemView.findViewById<CardView>(R.id.crdContainer)
         val imgPlace = holder.itemView.findViewById<ImageView>(R.id.imgPlace)
         val txtPlaceName = holder.itemView.findViewById<TextView>(R.id.txtPlaceName)
         val txtPlaceCategory = holder.itemView.findViewById<TextView>(R.id.txtPlaceCategory)
@@ -56,9 +60,13 @@ class PlaceRecyclerAdapter @Inject constructor(val glide: RequestManager): Recyc
 
         holder.itemView.apply {
             glide.load(iconUrl).into(imgPlace)
-            txtPlaceName.text = place?.name
+            txtPlaceName.text = place.name
             txtPlaceCategory.text = place.categories?.get(0)?.name
             txtPlaceRegion.text = place.location?.region
+
+            crdContainer.setOnClickListener {
+                itemClickListener?.invoke(position)
+            }
         }
     }
 }

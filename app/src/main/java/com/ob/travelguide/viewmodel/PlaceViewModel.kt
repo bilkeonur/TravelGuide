@@ -24,7 +24,7 @@ class PlaceViewModel @Inject constructor(private val placeRepository: IPlaceRepo
         viewModelScope.launch {
             places.value = Resource<Place>(Status.LOADING,null,"Loading")
             //Search For Istanbul
-            var baseURL = "https://api.foursquare.com/v3/places/search?sort=POPULARITY&limit=50&ll=41.0091,28.9743"
+            val baseURL = "https://api.foursquare.com/v3/places/search?sort=POPULARITY&limit=50&ll=41.0091,28.9743"
             val response = placeRepository.getPlaces(baseURL)
             places.value = response
         }

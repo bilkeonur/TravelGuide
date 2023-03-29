@@ -6,7 +6,7 @@ import com.bumptech.glide.RequestManager
 import com.ob.travelguide.adapter.PlaceRecyclerAdapter
 import javax.inject.Inject
 
-class TravelGuideFragmentFactory @Inject constructor(
+class PlaceFragmentFactory @Inject constructor(
     private val placeRecyclerAdapter: PlaceRecyclerAdapter,
     private val glide: RequestManager): FragmentFactory() {
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {

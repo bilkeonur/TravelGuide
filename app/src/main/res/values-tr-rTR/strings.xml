@@ -11,4 +11,11 @@
     <string name="place_region_title">Bölge :</string>
     <string name="place_region">Ankara</string>
     <string name="no_data">Veri Bulunamadı</string>
+    <string name="app_description">Seyahat Rehberi\nHadi Seyahat Edelim</string>
+    <string name="login_button_text">Foursquare ile Giriş Yap</string>
+    <string name="image_logo">Giriş Logosu</string>
+    <string name="text_confirm">Onay</string>
+    <string name="text_logout_question">Çıkış yapmak istediğinizden emin misiniz?</string>
+    <string name="text_yes">Evet</string>
+    <string name="text_no">Hayır</string>
 </resources>

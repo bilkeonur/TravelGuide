@@ -4,27 +4,37 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.ProgressBar
+import androidx.lifecycle.lifecycleScope
 import com.ob.travelguide.databinding.ActivityLoginBinding
-import com.ob.travelguide.service.FourSquareAPI
+import com.ob.travelguide.repo.ILoginRepository
+import com.ob.travelguide.util.DataStore
+import com.ob.travelguide.util.Status
 import com.ob.travelguide.util.Util
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
-class LoginActivity : AppCompatActivity() {
+@AndroidEntryPoint
+class LoginActivity: AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-    private var job: Job? = null
+    private lateinit var pbLoading: ProgressBar
 
-    val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
-        println("Error : ${throwable.localizedMessage}")
-    }
+    @Inject
+    lateinit var loginRepository: ILoginRepository
+
+    private lateinit var dataStore:DataStore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        dataStore = DataStore(this)
+
+        pbLoading = binding.pbLoading
         val btnLogin = binding.btnLogin
 
         btnLogin.setOnClickListener {
@@ -35,46 +45,56 @@ class LoginActivity : AppCompatActivity() {
 
             startActivity(intent)
         }
+
+        val accessToken = dataStore.getLogin()
+
+        accessToken?.let {
+            if(accessToken != "") {
+                val intent = Intent(this@LoginActivity,MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        }
     }
 
-    fun getAccessToken(code:String) {
-        val retrofit = Retrofit.Builder()
-            .baseUrl(Util.baseUrl)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(FourSquareAPI::class.java)
+    private suspend fun getAccessToken(code:String) {
 
-        job = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
-            val response = retrofit.getAccessToken(Util.clientId, Util.clientSecret, "authorization_code", Util.redirectUri, code)
+        val response = loginRepository.getAccessToken(code)
 
-            withContext(Dispatchers.Main) {
-                if(response != null) {
-                    println("Access Token : ${response.accessToken}")
-                    var intent = Intent(this@LoginActivity,MainActivity::class.java)
-                    startActivity(intent)
-                }
-                else {
-                    println("Access Token : Error")
-                }
+        if (response.status == Status.SUCCESS) {
+            pbLoading.visibility = View.GONE
+            val accessToken = response.data?.accessToken
+            println("Access Token : $accessToken")
+
+            accessToken?.let {
+                dataStore.setLogin(accessToken)
             }
+
+            val intent = Intent(this@LoginActivity,MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+        else {
+            pbLoading.visibility = View.GONE
+            println("Login Error")
         }
     }
 
     override fun onResume() {
         super.onResume()
-        var uri = intent.data
+        val uri = intent.data
 
         if(uri!=null && uri.toString().startsWith(Util.redirectUri)) {
             val code = uri.getQueryParameter("code")
             code?.let {
-                println("Code : ${code}")
-                getAccessToken(code)
+                println("Code : $code")
+
+                pbLoading.visibility = View.VISIBLE
+
+                lifecycleScope.launch {
+                    getAccessToken(code)
+                }
             }
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        job?.cancel()
     }
 }

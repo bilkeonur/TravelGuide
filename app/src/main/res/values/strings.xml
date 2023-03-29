@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Travel Guide</string>
     <string name="place_title">Places</string>
-    <string name="place_detail" >Place Detail</string>
+    <string name="place_detail">Place Detail</string>
     <string name="cities_spinner">Cities Spinner</string>
     <string name="place_image">Place Image</string>
     <string name="place_name">Place Name</string>
@@ -10,4 +10,11 @@
     <string name="place_region_title">Region :</string>
     <string name="place_region">Ankara</string>
     <string name="no_data">No Data</string>
+    <string name="app_description">Travel Guide\nLet\'s Travel</string>
+    <string name="login_button_text">Login With Foursquare</string>
+    <string name="image_logo">Intro Logo</string>
+    <string name="text_confirm">Confirm</string>
+    <string name="text_logout_question">Are you sure you want to Logout?</string>
+    <string name="text_yes">Yes</string>
+    <string name="text_no">No</string>
 </resources>
